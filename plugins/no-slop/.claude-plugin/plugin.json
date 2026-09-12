@@ -1,0 +1,8 @@
+{
+  "name": "no-slop",
+  "version": "0.1.0",
+  "description": "Make reader-facing prose simple, self-contained, and free of formulaic rhetoric.",
+  "author": {"name": "No Slop Contributors"},
+  "license": "MIT",
+  "keywords": ["writing", "editing", "plain-language", "technical-writing", "reports"]
+}
