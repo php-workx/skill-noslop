@@ -22,11 +22,30 @@ Before drafting or rewriting, record a compact private checklist:
 
 This is an intent map, not hidden chain of thought. Do not expose it unless the user asks.
 
-## Use a fresh reader when available
+## Default to local reconstruction
 
-After the first complete draft, ask one fresh subagent to reconstruct the document. Give it only the draft and the audience definition.
+After the first complete draft, perform one separate reconstruction using only the finished draft. Ask:
 
-Do not give the reader the intent map, prior conversation, intended conclusion, repository access, tools, or external references. The review must reveal what the document communicates by itself.
+- Can an engineer unfamiliar with this work identify the problem, conclusion, and any requested action?
+- Are project-local terms and acronyms explained at first use?
+- Are components introduced before their interactions?
+- Does the document state causal and logical relationships, or does it expect the reader to infer them?
+- Does each important technical detail explain why it matters?
+- Can the reader distinguish observed facts, interpretations, assumptions, and recommendations?
+- Did shortening remove an explanation needed to understand the result?
+
+This local pass is less independent than a fresh reader. Treat inferred clarity cautiously.
+
+## Use a fresh reader for deep verification
+
+Use one isolated fresh-reader reconstruction instead of the local pass when either condition applies:
+
+- The user requests a deep review, fresh-reader pass, publication-ready verification, or equivalent independent check.
+- The user requests an audit of a context-heavy, multi-paragraph document.
+
+An explicit request for a quick pass or no second reader wins and uses the local reconstruction. Do not pause to ask permission. Do not run an isolated reader merely because the runtime supports subagents.
+
+Give the fresh reader only the draft and the audience definition. Do not give it the intent map, prior conversation, intended conclusion, repository access, tools, or external references. The review must reveal what the document communicates by itself.
 
 Ask the reader to return:
 
@@ -49,7 +68,7 @@ The reader reports observable understanding. It does not rewrite the document, s
 
 ## Compare and repair
 
-Compare the reader reconstruction with the private intent map. The writer, not the reader, classifies each mismatch:
+Compare the reconstruction with the private intent map. The writer, not the reader, classifies each mismatch:
 
 - `blocking`: the reader cannot identify a conclusion, mechanism, or required action that the document intends to communicate;
 - `material`: a missing definition, prerequisite, or relationship could cause misunderstanding;
@@ -61,21 +80,7 @@ Repair blocking gaps. Repair material gaps when the supplied material supports t
 
 Do not invent missing facts or explanations. Ask one precise question when a blocking gap requires information only the author can provide.
 
-Run one repair cycle. A second fresh-reader pass is justified only when the first reader misunderstood the main conclusion, mechanism, or requested action.
-
-## Local fallback
-
-When fresh subagents are unavailable, perform one separate reconstruction pass using only the finished draft. Ask:
-
-- Can an engineer unfamiliar with this work identify the problem, conclusion, and any requested action?
-- Are project-local terms and acronyms explained at first use?
-- Are components introduced before their interactions?
-- Does the document state causal and logical relationships, or does it expect the reader to infer them?
-- Does each important technical detail explain why it matters?
-- Can the reader distinguish observed facts, interpretations, assumptions, and recommendations?
-- Did shortening remove an explanation needed to understand the result?
-
-The local fallback is less independent. Treat inferred clarity cautiously.
+Run one repair cycle. A second isolated pass is justified only when the first fresh reader misunderstood the main conclusion, mechanism, or requested action.
 
 ## Deliver only the requested document
 

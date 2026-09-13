@@ -47,7 +47,7 @@ Do not rewrite. Quote each observable finding, assign a verdict, name the patter
 
 ## Complex reports and analyses
 
-For context-heavy, multi-paragraph technical documents, read the [comprehension pass](references/comprehension.md). Use one isolated fresh-reader reconstruction when the runtime supports subagents. Otherwise use the local reconstruction fallback. Keep the intent map and review internal unless the user asks to see them.
+For context-heavy, multi-paragraph technical documents, read the [comprehension pass](references/comprehension.md). Use the local reconstruction by default. Use one isolated fresh-reader reconstruction only for a complex audit or when the user explicitly requests a deep review, fresh-reader pass, publication-ready verification, or equivalent independent check. An explicit request for a quick pass or no second reader keeps the local reconstruction. Do not interrupt the task to ask for approval. Keep the intent map and review internal unless the user asks to see them.
 
 ## Editing method
 
@@ -56,7 +56,7 @@ For context-heavy, multi-paragraph technical documents, read the [comprehension 
 3. Fix substance and missing context before style. Do not disguise a missing fact, definition, mechanism, prerequisite, example, judgment, or relationship with polished generic prose.
 4. Rewrite the meaning, not the surface pattern. If a sentence makes a real distinction, keeps useful uncertainty, provides necessary context, or carries the writer's voice, preserve it.
 5. Check genre expectations in [genres](references/genres.md).
-6. For a complex report or analysis, run the comprehension pass once.
+6. For a complex report or analysis, run the local comprehension pass once by default. Use an isolated fresh reader only under the criteria above.
 7. Before responding, verify preserved facts and format, enough context for the intended reader, no fabricated specificity or logical relation, no unprotected em dashes, and no fresh formulaic pattern introduced by the rewrite.
 
 ## Quick review
