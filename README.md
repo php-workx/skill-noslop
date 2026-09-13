@@ -4,6 +4,57 @@ No Slop makes reader-facing prose simple, concise, direct, and understandable wi
 
 The skill preserves supplied facts, numbers, links, citations, uncertainty, necessary context, protected content, and requested output formats. It does not diagnose whether a person used AI.
 
+## Why
+
+LLMs often produce polished writing that is harder to understand than it needs to be. Reports and analyses may use complicated language, hide the main point, or assume the reader knows the project and earlier discussion.
+
+Editing can create a second problem: it may flatten the vocabulary, cadence, humor, uncertainty, and useful edge that make the writing sound like its author.
+
+No Slop makes the language simpler while preserving meaning and voice. For technical reports, it also checks whether a mixed engineering audience has enough context to understand the concepts, relationships, and requested action.
+
+## Quick install
+
+Install No Slop globally with the Skills CLI:
+
+```sh
+npx skills add php-workx/skill-noslop --skill no-slop --global --yes
+```
+
+The CLI installs the skill in your user scope and links compatible detected agents to it. Restart the agent after installation.
+
+To target one agent explicitly:
+
+```sh
+npx skills add php-workx/skill-noslop --skill no-slop --global --agent claude-code --yes
+npx skills add php-workx/skill-noslop --skill no-slop --global --agent codex --yes
+```
+
+You can also ask a coding agent:
+
+```text
+Install the no-slop skill globally from https://github.com/php-workx/skill-noslop
+```
+
+## Use
+
+Claude Code with the standalone skill:
+
+```text
+/no-slop Rewrite this incident report in plain language for engineers who do not know the project.
+```
+
+Codex:
+
+```text
+$no-slop Rewrite this analysis. Preserve the technical details, but explain the missing context.
+```
+
+Audit without rewriting:
+
+```text
+Use no-slop to audit this report for formulaic language and missing explanatory context.
+```
+
 ## What it does
 
 - Drafts reader-facing prose without formulaic filler, false drama, puffery, or generic conclusions.
@@ -16,38 +67,60 @@ The skill preserves supplied facts, numbers, links, citations, uncertainty, nece
 
 For complex reports and analyses, No Slop uses one fresh-reader reconstruction when the runtime supports isolated subagents. The reader sees only the draft and audience definition, then reports what it understood and which context is missing. When subagents are unavailable, the skill applies the same reconstruction checklist locally. The intent map and review remain internal unless requested.
 
-## Tested runtimes
+## Common patterns
 
-| Runtime | Tested version | Installation |
+No Slop checks these patterns in context rather than deleting them mechanically:
+
+- Empty contrast such as “not X, but Y”
+- Throat-clearing before the real point
+- Fake insight or reveal language
+- Unsupported importance claims and generic praise
+- Vague authority such as “experts agree”
+- Superficial analysis that names no mechanism or consequence
+- Repetitive sentence shapes and dramatic fragments
+- Synonym cycling that makes terminology less consistent
+- Generic recap endings
+- Missing actors, definitions, prerequisites, relationships, or significance
+
+## Skill installation versus plugin installation
+
+| | Standalone skill with `npx skills` | Native plugin |
 | --- | --- | --- |
-| Codex CLI | `0.150.1` | Standalone skill |
-| Claude Code | `2.1.251` | Session-local plugin or standalone skill |
+| Installs | `SKILL.md` and its reference files | A runtime-specific package that may contain skills, commands, agents, hooks, MCP servers, LSP servers, settings, or executables |
+| Scope | Works across supported agents and can be installed globally or per project | Installed and managed by one agent runtime |
+| Invocation | Uses the agent's normal skill name, such as `/no-slop` or `$no-slop` | Claude namespaces the skill, such as `/no-slop:no-slop` |
+| Updates | `npx skills update --global` | The runtime's plugin manager and plugin version |
+| Best use | Simple installation of portable instructions | Distribution of several runtime features as one versioned package |
+
+No Slop currently ships one skill and no hooks, MCP servers, or background services. The standalone `npx` installation provides the same writing behavior and is the recommended option.
+
+For Codex, use the standalone `npx` installation. This repository includes Codex package metadata for distribution tooling, but it does not publish a Codex marketplace installation.
 
 ## Claude Code: session-local plugin
 
-Claude loads this plugin for the current session only. From the clone root, start Claude with:
+The repository also contains a Claude plugin manifest for local testing and plugin-based distribution. Clone the repository and start Claude from the clone root:
 
 ```sh
 claude --plugin-dir /absolute/path/to/clone/plugins/no-slop
 ```
 
-In that fresh session, invoke:
+Invoke the namespaced plugin skill:
 
 ```text
 /no-slop:no-slop Rewrite this release note in plain language.
 ```
 
-`--plugin-dir` does not persist the plugin installation. Use the standalone installation below when you want the skill available across sessions.
+`--plugin-dir` loads the plugin for that session. It does not persist the installation.
 
-## Standalone installation
+## Manual standalone installation
 
-The canonical standalone source is:
+The standalone skill directory is:
 
 ```text
 /absolute/path/to/clone/plugins/no-slop/skills/no-slop
 ```
 
-Copy that directory to one target for the agent you use:
+Copy it to the directory used by your agent:
 
 ```sh
 cp -R /absolute/path/to/clone/plugins/no-slop/skills/no-slop ~/.agents/skills/no-slop
@@ -55,9 +128,12 @@ cp -R /absolute/path/to/clone/plugins/no-slop/skills/no-slop ~/.codex/skills/no-
 cp -R /absolute/path/to/clone/plugins/no-slop/skills/no-slop ~/.claude/skills/no-slop
 ```
 
-Restart the agent after installation.
+## Tested runtimes
 
-In a new Codex thread, invoke `$no-slop`. In Claude Code, invoke `/no-slop:no-slop`.
+| Runtime | Tested version | Recommended installation |
+| --- | --- | --- |
+| Codex CLI | `0.150.1` | Global standalone skill |
+| Claude Code | `2.1.251` | Global standalone skill |
 
 ## Modes
 
