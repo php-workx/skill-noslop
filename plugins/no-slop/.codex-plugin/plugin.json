@@ -1,0 +1,18 @@
+{
+  "name": "no-slop",
+  "version": "0.1.0",
+  "description": "Make reader-facing prose simple, self-contained, and free of formulaic rhetoric.",
+  "author": {"name": "No Slop Contributors"},
+  "license": "MIT",
+  "keywords": ["writing", "editing", "plain-language", "technical-writing", "reports"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "No Slop",
+    "shortDescription": "Make prose plain and self-contained.",
+    "longDescription": "Makes prose easy to understand while preserving facts, necessary context, intent, and requested format.",
+    "developerName": "No Slop Contributors",
+    "category": "Productivity",
+    "capabilities": ["Edit", "Audit", "Plain language", "Comprehension review"],
+    "defaultPrompt": ["Use $no-slop to make this prose simple, direct, and understandable without prior project context."]
+  }
+}

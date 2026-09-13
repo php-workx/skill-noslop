@@ -1,0 +1,6 @@
+interface:
+  display_name: "No Slop"
+  short_description: "Make prose plain, direct, and self-contained."
+  default_prompt: "Use $no-slop to make this prose simple, concise, and understandable without prior project context."
+policy:
+  allow_implicit_invocation: true
