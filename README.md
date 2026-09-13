@@ -55,6 +55,12 @@ Audit without rewriting:
 Use no-slop to audit this report for formulaic language and missing explanatory context.
 ```
 
+Request an isolated fresh-reader check:
+
+```text
+Use no-slop to deep-review this design proposal for readers unfamiliar with the system.
+```
+
 ## What it does
 
 - Drafts reader-facing prose without formulaic filler, false drama, puffery, or generic conclusions.
@@ -65,7 +71,7 @@ Use no-slop to audit this report for formulaic language and missing explanatory 
 - Replaces em dashes in editable prose with punctuation or clearer sentence structure.
 - Keeps code, commands, identifiers, literal quotations, legal or policy text, and marked protected spans unchanged.
 
-For complex reports and analyses, No Slop uses one fresh-reader reconstruction when the runtime supports isolated subagents. The reader sees only the draft and audience definition, then reports what it understood and which context is missing. When subagents are unavailable, the skill applies the same reconstruction checklist locally. The intent map and review remain internal unless requested.
+For complex reports and analyses, No Slop runs a local comprehension reconstruction by default. A complex audit or an explicit request for a deep review, fresh-reader pass, or publication-ready verification uses one isolated reader when the runtime supports subagents. Say `quick` or `no second reader` to keep the local check. The intent map and review remain internal unless requested.
 
 ## Common patterns
 
